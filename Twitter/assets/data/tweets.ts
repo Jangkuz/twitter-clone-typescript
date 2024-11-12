@@ -6,7 +6,8 @@ const tweets = [
       username: 'VadimNotJustDev',
       name: 'Vadim',
       image:
-        'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/vadim.png',
+        '@/assets/images/anime_pfp/anime_pfp_1.jpg',
+        
     },
     createdAt: '2020-08-27T12:00:00.000Z',
     content: 'Can you please check if the Subscribe button on Youtube works?',
@@ -17,7 +18,7 @@ const tweets = [
     numberOfLikes: 10,
   },
   {
-    id: '111111111',
+    id: 't1',
     createdAt: '2023-04-28T08:30:00.000Z',
     user: {
       id: '123456789',

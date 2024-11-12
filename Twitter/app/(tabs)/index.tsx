@@ -1,26 +1,19 @@
-import { StyleSheet, Image } from 'react-native';
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-import Tweets from '../../assets/data/tweets'; 
-
-const tweetData = Tweets[1];
+import { StyleSheet, Image } from "react-native";
+import Tweet from "@/components/Tweet";
+import { View } from "@/components/Themed";
 export default function TabOneScreen() {
   return (
     <View style={styles.container}>
-     <Image src={tweetData.user.image} style={styles.userTweetImage}/>
-     <Text>{tweetData.content}</Text> 
+      <Tweet />
+      <Tweet />
+      <Tweet />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "red",
+    flex: 1,
   },
- userTweetImage:{
-  width: 50,
-  height: 50,
-  borderRadius: 50,
- } 
 });
