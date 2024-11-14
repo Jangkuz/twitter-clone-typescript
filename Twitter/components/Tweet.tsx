@@ -1,19 +1,22 @@
 import { StyleSheet, Image } from "react-native";
 import { View, Text } from "@/components/Themed";
-import Tweets from "@/assets/data/tweets";
+import { Int32 } from "react-native/Libraries/Types/CodegenTypes";
+import { TweetType } from "@/type/type";
 
-const tweetData = Tweets[1];
-const Tweet = () => {
+export type TweetProp = {
+  tweet: TweetType;
+};
+const TweetComponent = ({ tweet}: TweetProp) => {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: tweetData.user.image }}
+        source={{ uri: tweet.user.image }}
         style={styles.userTweetImage}
       />
       {/* <Image source={require('@/assets/images/anime_pfp/anime_pfp_1.jpg')} style={styles.userTweetImage} /> */}
       <View style={styles.mainContainer}>
-        <Text style={styles.userTweetName}>{tweetData.user.name}</Text>
-        <Text>{tweetData.content}</Text>
+        <Text style={styles.userTweetName}>{tweet.user.name}</Text>
+        <Text>{tweet.content}</Text>
       </View>
     </View>
   );
@@ -41,4 +44,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Tweet;
+export default TweetComponent;
