@@ -7,13 +7,11 @@ import { Link, Href } from "expo-router";
 
 export type TweetProp = {
   tweet: TweetType;
-  pathName: Href;
 };
 const timeSinceTweeted: string = "2h";
-const TweetComponent = ({ tweet, pathName }: TweetProp) => {
+const TweetComponent = ({ tweet }: TweetProp) => {
   return (
-    <Link href={pathName}>
-      {/* <Link href={`/status/${tweet.id}`} > */}
+    <Link href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}>
       <View style={styles.container}>
         <Image
           source={{ uri: tweet.user.image }}
