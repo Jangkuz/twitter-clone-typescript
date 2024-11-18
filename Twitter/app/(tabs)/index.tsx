@@ -2,7 +2,6 @@ import { StyleSheet, Image, FlatList } from "react-native";
 import TweetComponent from "@/components/Tweet";
 import { View } from "@/components/Themed";
 import Tweets from "@/assets/data/tweets";
-import { TweetProp } from "@/components/Tweet";
 import { TweetType } from "@/type/type";
 
 const tweetData: TweetType[] = Tweets;

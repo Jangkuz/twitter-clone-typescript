@@ -3,55 +3,63 @@ import { View, Text } from "@/components/Themed";
 import { TweetType } from "@/type/type";
 import Entypo from "@expo/vector-icons/Entypo";
 import IconButton from "./IconButton";
+import { Link, Href } from "expo-router";
 
 export type TweetProp = {
   tweet: TweetType;
+  pathName: Href;
 };
 const timeSinceTweeted: string = "2h";
-const TweetComponent = ({ tweet }: TweetProp) => {
+const TweetComponent = ({ tweet, pathName }: TweetProp) => {
   return (
-    <View style={styles.container}>
-      <Image source={{ uri: tweet.user.image }} style={styles.userTweetImage} />
-      <View style={styles.mainContainer}>
-        <View style={{ flexDirection: "row" }}>
-          <Text style={styles.userTweetName}>{tweet.user.name}</Text>
-          <Text style={styles.userTweetUsername}>
-            @{tweet.user.username} - {timeSinceTweeted}
-          </Text>
-          <Entypo
-            name="dots-three-horizontal"
-            size={16}
-            color="gray"
-            style={{ marginLeft: "auto" }}
-          />
-        </View>
+    <Link href={pathName}>
+      {/* <Link href={`/status/${tweet.id}`} > */}
+      <View style={styles.container}>
+        <Image
+          source={{ uri: tweet.user.image }}
+          style={styles.userTweetImage}
+        />
+        <View style={styles.mainContainer}>
+          <View style={{ flexDirection: "row" }}>
+            <Text style={styles.userTweetName}>{tweet.user.name}</Text>
+            <Text style={styles.userTweetUsername}>
+              @{tweet.user.username} - {timeSinceTweeted}
+            </Text>
+            <Entypo
+              name="dots-three-horizontal"
+              size={16}
+              color="gray"
+              style={{ marginLeft: "auto" }}
+            />
+          </View>
 
-        <Text>{tweet.content}</Text>
+          <Text>{tweet.content}</Text>
 
-        {tweet.image && (
-          <Image source={{ uri: tweet.image }} style={styles.tweetImage} />
-        )}
+          {tweet.image && (
+            <Image source={{ uri: tweet.image }} style={styles.tweetImage} />
+          )}
 
-        <View style={styles.footer}>
-          <IconButton
-            iconName="comment"
-            numberOfInteraction={tweet.numberOfComments || 0}
-          />
-          <IconButton
-            iconName="retweet"
-            numberOfInteraction={tweet.numberOfRetweets || 0}
-          />
-          <IconButton
-            iconName="heart"
-            numberOfInteraction={tweet.numberOfLikes || 0}
-          />
-          <IconButton
-            iconName="share-apple"
-            numberOfInteraction={tweet.impressions || 0}
-          />
+          <View style={styles.footer}>
+            <IconButton
+              iconName="comment"
+              numberOfInteraction={tweet.numberOfComments || 0}
+            />
+            <IconButton
+              iconName="retweet"
+              numberOfInteraction={tweet.numberOfRetweets || 0}
+            />
+            <IconButton
+              iconName="heart"
+              numberOfInteraction={tweet.numberOfLikes || 0}
+            />
+            <IconButton
+              iconName="share-apple"
+              numberOfInteraction={tweet.impressions || 0}
+            />
+          </View>
         </View>
       </View>
-    </View>
+    </Link>
   );
 };
 
