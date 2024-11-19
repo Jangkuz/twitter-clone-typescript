@@ -3,7 +3,7 @@ import { View, Text } from "@/components/Themed";
 import { TweetType } from "@/type/type";
 import Entypo from "@expo/vector-icons/Entypo";
 import IconButton from "./IconButton";
-import { Link, Href } from "expo-router";
+import { Link } from "expo-router";
 
 export type TweetProp = {
   tweet: TweetType;
@@ -18,7 +18,7 @@ const TweetComponent = ({ tweet }: TweetProp) => {
           style={styles.userTweetImage}
         />
         <View style={styles.mainContainer}>
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", flex: 1 }}>
             <Text style={styles.userTweetName}>{tweet.user.name}</Text>
             <Text style={styles.userTweetUsername}>
               @{tweet.user.username} - {timeSinceTweeted}
@@ -31,7 +31,7 @@ const TweetComponent = ({ tweet }: TweetProp) => {
             />
           </View>
 
-          <Text>{tweet.content}</Text>
+            <Text >{tweet.content}</Text>
 
           {tweet.image && (
             <Image source={{ uri: tweet.image }} style={styles.tweetImage} />
@@ -65,10 +65,12 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
+    flex: 1,
     flexDirection: "row",
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: "grey",
     padding: 10,
+    minWidth: "100%"
   },
   mainContainer: {
     marginLeft: 20,
