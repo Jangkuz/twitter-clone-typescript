@@ -1,4 +1,4 @@
-import { StyleSheet, Image, FlatList, Pressable } from "react-native";
+import { StyleSheet, Image, FlatList, Pressable, Text } from "react-native";
 import TweetComponent from "@/components/Tweet";
 import { View } from "@/components/Themed";
 import Tweets from "@/assets/data/tweets";
@@ -9,6 +9,10 @@ const tweetData: TweetType[] = Tweets;
 export default function TabOneScreen() {
   return (
     <>
+      <View style={{ flexDirection: "row", flex: 1, }}>
+        <View style={{maxWidth: "25%", flex: 1}}>
+        <Text style={{marginLeft: "auto"}}>Nav</Text>
+        </View>
         <View style={styles.homeFeedContainer}>
           <FlatList
             data={Tweets}
@@ -18,17 +22,18 @@ export default function TabOneScreen() {
           />
           <NewTweetButton />
         </View>
+      </View>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   homeFeedContainer: {
     backgroundColor: "red",
-    flex: 1,
+    flex: 2,
     maxWidth: 600,
     position: "relative",
   },
