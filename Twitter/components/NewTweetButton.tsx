@@ -2,14 +2,11 @@ import { Pressable, StyleSheet, View } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Link } from "expo-router";
 
-function ToNewTweetScreen() {
-  console.log("new tweet");
-}
 
 const NewTweetButton = () => {
   return (
     <Link href={{ pathname: "/newTweet" }} asChild>
-      <Pressable style={styles.button} onPress={ToNewTweetScreen}>
+      <Pressable style={styles.button} >
         <AntDesign name="plus" size={30} color="black" />
       </Pressable>
     </Link>

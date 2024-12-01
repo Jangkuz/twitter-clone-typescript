@@ -37,11 +37,11 @@ export default function () {
               style={styles.userImage}
             />
           </View>
-          <View style={styles.textInput}>
+          <View style={styles.inputField}>
             <TextInput
               placeholder={"What is happening?"}
               placeholderTextColor={"gray"}
-              style={{ flex: 1 }}
+              style={styles.textInput}
               multiline
               numberOfLines={5}
               value={text}
@@ -60,6 +60,7 @@ export default function () {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 25,
   },
   headerContainer: {
     width: "100%",
@@ -71,6 +72,10 @@ const styles = StyleSheet.create({
     width: "100%",
     flex: 1,
     flexDirection: "row",
+  },
+  inputField: {
+   flex: 1,
+   padding: 5,
   },
   footerContainer: {
     width: "100%",
@@ -84,5 +89,6 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 1,
     padding: 10,
+    textAlignVertical: "top",
   },
 });
