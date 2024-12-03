@@ -1,9 +1,10 @@
-import { StyleSheet, Image } from "react-native";
+import { StyleSheet, Image, Pressable } from "react-native";
 import { View, Text } from "@/components/Themed";
 import { TweetType } from "@/type/type";
 import Entypo from "@expo/vector-icons/Entypo";
 import IconButton from "./IconButton";
 import { Link } from "expo-router";
+import { navigate } from "expo-router/build/global-state/routing";
 
 export type TweetProp = {
   tweet: TweetType;
@@ -11,14 +12,27 @@ export type TweetProp = {
 const timeSinceTweeted: string = "2h";
 const TweetComponent = ({ tweet }: TweetProp) => {
   return (
-    <Link href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}>
+    <View style={{ flex: 1 }}>
       <View style={styles.container}>
-        <Image
-          source={{ uri: tweet.user.image }}
-          style={styles.userTweetImage}
-        />
-        <View style={styles.mainContainer}>
-          <View style={{ flexDirection: "row", flex: 1 }}>
+        <Link
+          href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}
+          asChild
+        >
+          <Pressable>
+            <Image
+              source={{ uri: tweet.user.image }}
+              style={styles.userTweetImage}
+            />
+          </Pressable>
+        </Link>
+
+        <View style={styles.tweetContentContainer}>
+          <View
+            style={{
+              flexDirection: "row",
+              flex: 1,
+            }}
+          >
             <Text style={styles.userTweetName}>{tweet.user.name}</Text>
             <Text style={styles.userTweetUsername}>
               @{tweet.user.username} - {timeSinceTweeted}
@@ -31,7 +45,16 @@ const TweetComponent = ({ tweet }: TweetProp) => {
             />
           </View>
 
-            <Text >{tweet.content}</Text>
+          <Link
+            href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}
+            asChild
+          >
+            <Pressable>
+              <View>
+                <Text>{tweet.content}</Text>
+              </View>
+            </Pressable>
+          </Link>
 
           {tweet.image && (
             <Image source={{ uri: tweet.image }} style={styles.tweetImage} />
@@ -57,7 +80,7 @@ const TweetComponent = ({ tweet }: TweetProp) => {
           </View>
         </View>
       </View>
-    </Link>
+    </View>
   );
 };
 
@@ -70,11 +93,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: "grey",
     padding: 10,
-    minWidth: "100%"
+    minWidth: "100%",
+    // width: "100%",
   },
-  mainContainer: {
+  tweetContentContainer: {
     marginLeft: 20,
     flex: 1,
+    maxWidth: "100%",
   },
   userTweetImage: {
     width: 50,
@@ -91,6 +116,7 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
   tweetImage: {
+    flex: 1,
     width: "100%",
     aspectRatio: 16 / 9,
   },
