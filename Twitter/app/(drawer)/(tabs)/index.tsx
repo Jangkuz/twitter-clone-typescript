@@ -1,9 +1,6 @@
 import {
   StyleSheet,
-  Image,
   FlatList,
-  Pressable,
-  Text,
   SafeAreaView,
 } from "react-native";
 import TweetComponent from "@/components/Tweet";

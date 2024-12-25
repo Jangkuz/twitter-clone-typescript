@@ -12,82 +12,75 @@ export type TweetProp = {
 const timeSinceTweeted: string = "2h";
 const TweetComponent = ({ tweet }: TweetProp) => {
   return (
-    <View style={{ flex: 1 }}>
-      <View style={styles.container}>
-        <Link
-          href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}
-          asChild
+    // <View style={{ flex: 1 }}>
+    <View style={styles.container}>
+      <Link
+        href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}
+        asChild
+      >
+        <Pressable>
+          <Image
+            source={{ uri: tweet.user.image }}
+            style={styles.userTweetImage}
+          />
+        </Pressable>
+      </Link>
+
+      <View style={styles.tweetContentContainer}>
+        <View
+          style={{
+            flexDirection: "row",
+            flex: 1,
+          }}
         >
-          <Pressable>
-            <Image
-              source={{ uri: tweet.user.image }}
-              style={styles.userTweetImage}
-            />
-          </Pressable>
-        </Link>
+          <Text style={styles.userTweetName}>{tweet.user.name}</Text>
+          <Text style={styles.userTweetUsername}>
+            @{tweet.user.username} - {timeSinceTweeted}
+          </Text>
+          <Entypo
+            name="dots-three-horizontal"
+            size={16}
+            color="gray"
+            style={{ marginLeft: "auto" }}
+          />
+        </View>
 
-        <View style={styles.tweetContentContainer}>
-          <View
-            style={{
-              flexDirection: "row",
-              flex: 1,
-            }}
-          >
-            <Text style={styles.userTweetName}>{tweet.user.name}</Text>
-            <Text style={styles.userTweetUsername}>
-              @{tweet.user.username} - {timeSinceTweeted}
-            </Text>
-            <Entypo
-              name="dots-three-horizontal"
-              size={16}
-              color="gray"
-              style={{ marginLeft: "auto" }}
-            />
-          </View>
+        <View style={styles.tweetContent}>
+          <Text>{tweet.content}</Text>
+        </View>
 
-          <Link
-            href={{ pathname: "/status/[id]", params: { id: `${tweet.id}` } }}
-            asChild
-          >
-            <Pressable>
-              <View>
-                <Text>{tweet.content}</Text>
-              </View>
-            </Pressable>
-          </Link>
+        {tweet.image && (
+          <Image source={{ uri: tweet.image }} style={styles.tweetImage} />
+        )}
 
-          {tweet.image && (
-            <Image source={{ uri: tweet.image }} style={styles.tweetImage} />
-          )}
-
-          <View style={styles.footer}>
-            <IconButton
-              iconName="comment"
-              numberOfInteraction={tweet.numberOfComments || 0}
-            />
-            <IconButton
-              iconName="retweet"
-              numberOfInteraction={tweet.numberOfRetweets || 0}
-            />
-            <IconButton
-              iconName="heart"
-              numberOfInteraction={tweet.numberOfLikes || 0}
-            />
-            <IconButton
-              iconName="share-apple"
-              numberOfInteraction={tweet.impressions || 0}
-            />
-          </View>
+        <View style={styles.footer}>
+          <IconButton
+            iconName="comment"
+            numberOfInteraction={tweet.numberOfComments || 0}
+          />
+          <IconButton
+            iconName="retweet"
+            numberOfInteraction={tweet.numberOfRetweets || 0}
+          />
+          <IconButton
+            iconName="heart"
+            numberOfInteraction={tweet.numberOfLikes || 0}
+          />
+          <IconButton
+            iconName="share-apple"
+            numberOfInteraction={tweet.impressions || 0}
+          />
         </View>
       </View>
     </View>
+    // </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
     flex: 1,
     flexDirection: "row",
     borderBottomWidth: StyleSheet.hairlineWidth,
@@ -100,6 +93,8 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     flex: 1,
     maxWidth: "100%",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
   userTweetImage: {
     width: 50,
@@ -115,10 +110,14 @@ const styles = StyleSheet.create({
     color: "grey",
     paddingLeft: 5,
   },
+  tweetContent: {
+    alignSelf: "flex-start",
+  },
   tweetImage: {
     flex: 1,
-    width: "100%",
+    maxWidth: "100%",
     aspectRatio: 16 / 9,
+    alignSelf: "center",
   },
   footer: {
     padding: 5,
